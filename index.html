@@ -11,31 +11,38 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #050b14;
-      color: #eaf2ff;
+      background-color: #0a1628;
+      color: #eef6ff;
       line-height: 1.6;
       overflow-x: hidden;
       -webkit-text-size-adjust: 100%;
     }
 
+    /* 更明亮的背景网格与光晕 */
     .grid-bg {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background-image:
-        linear-gradient(rgba(0, 180, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 180, 255, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(0, 220, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 220, 255, 0.06) 1px, transparent 1px);
       background-size: 60px 60px;
       pointer-events: none; z-index: 0;
     }
     .glow-orb {
-      position: fixed; width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 150, 255, 0.15) 0%, rgba(0, 50, 150, 0) 70%);
-      top: -200px; right: -200px; z-index: 0; pointer-events: none;
+      position: fixed; width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 200, 255, 0.25) 0%, rgba(0, 100, 200, 0) 70%);
+      top: -250px; right: -200px; z-index: 0; pointer-events: none;
     }
     .glow-orb-2 {
-      position: fixed; width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 200, 255, 0.1) 0%, rgba(0, 30, 100, 0) 70%);
-      bottom: -150px; left: -150px; z-index: 0; pointer-events: none;
+      position: fixed; width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(80, 220, 255, 0.18) 0%, rgba(0, 100, 200, 0) 70%);
+      bottom: -200px; left: -200px; z-index: 0; pointer-events: none;
     }
+    .glow-orb-3 {
+      position: fixed; width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 220, 100, 0.10) 0%, rgba(255, 180, 0, 0) 70%);
+      top: 40%; left: 30%; z-index: 0; pointer-events: none;
+    }
+
     .container {
       max-width: 1280px; margin: 0 auto; padding: 0 24px;
       position: relative; z-index: 2;
@@ -44,92 +51,136 @@
     /* 导航栏 */
     .navbar {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 20px 0; border-bottom: 1px solid rgba(0, 180, 255, 0.2);
-      backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 100;
-      background: rgba(5, 11, 20, 0.7);
+      padding: 16px 0; border-bottom: 1px solid rgba(0, 220, 255, 0.3);
+      backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;
+      background: rgba(10, 22, 40, 0.75);
     }
-    .logo { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.6rem; letter-spacing: -0.5px; color: #fff; }
-    .logo i { color: #00c8ff; font-size: 2rem; filter: drop-shadow(0 0 8px rgba(0, 200, 255, 0.8)); }
-    .logo span {
-      background: linear-gradient(135deg, #ffffff 0%, #8dd0ff 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    .logo {
+      display: flex; align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
     }
+    .logo img {
+      width: 64px;
+      height: 63px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(0, 220, 255, 0.6));
+      transition: filter 0.3s ease;
+    }
+    .logo img:hover {
+      filter: drop-shadow(0 0 18px rgba(0, 240, 255, 0.9));
+    }
+
     .nav-links { display: flex; gap: 32px; align-items: center; }
-    .nav-links a { color: #b8d4f0; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
-    .nav-links a:hover { color: #00c8ff; }
+    .nav-links a {
+      color: #b8d8f8; text-decoration: none; font-weight: 500; font-size: 0.95rem;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+    .nav-links a:hover {
+      color: #7fe8ff;
+      text-shadow: 0 0 12px rgba(0, 220, 255, 0.6);
+    }
 
     section { padding: 50px 0; position: relative; z-index: 2; }
 
     /* 英雄区 */
     .hero { padding-top: 40px; padding-bottom: 50px; display: flex; flex-direction: column; align-items: center; text-align: center; }
     .hero-badge {
-      background: rgba(0, 180, 255, 0.15); border: 1px solid rgba(0, 200, 255, 0.3);
-      border-radius: 40px; padding: 6px 18px; font-size: 0.85rem; color: #7fd4ff;
-      letter-spacing: 1px; margin-bottom: 24px; display: inline-block; backdrop-filter: blur(4px);
+      background: rgba(0, 220, 255, 0.18);
+      border: 1px solid rgba(0, 240, 255, 0.5);
+      border-radius: 40px; padding: 6px 18px; font-size: 0.85rem;
+      color: #9fe8ff; letter-spacing: 1px; margin-bottom: 24px;
+      display: inline-block; backdrop-filter: blur(4px);
+      box-shadow: 0 0 20px rgba(0, 200, 255, 0.15);
     }
     .hero h1 {
       font-size: 4.2rem; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;
       margin-bottom: 24px; max-width: 900px;
-      background: linear-gradient(135deg, #ffffff 0%, #a0d0ff 70%, #00aaff 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #a8e4ff 40%, #7fe8ff 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 30px rgba(0, 200, 255, 0.15));
     }
-    .hero-sub { font-size: 1.25rem; color: #9cb9d9; max-width: 720px; margin-bottom: 20px; line-height: 1.3; }
-    .hero-highlight { color: #00c8ff; font-weight: 600; }
+    .hero-sub { font-size: 1.25rem; color: #a0c4e8; max-width: 720px; margin-bottom: 20px; line-height: 1.3; }
+    .hero-highlight { color: #7fe8ff; font-weight: 600; }
     .hero-tags { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin: 30px 0 40px; }
     .tag {
-      background: rgba(0, 100, 255, 0.1); border: 1px solid rgba(0, 180, 255, 0.3);
+      background: rgba(0, 200, 255, 0.12);
+      border: 1px solid rgba(0, 220, 255, 0.35);
       border-radius: 30px; padding: 8px 20px; font-size: 0.9rem; font-weight: 500;
-      color: #b0dcff; backdrop-filter: blur(4px);
+      color: #b8e8ff; backdrop-filter: blur(4px);
+      transition: all 0.3s ease;
+    }
+    .tag:hover {
+      background: rgba(0, 220, 255, 0.2);
+      border-color: rgba(0, 240, 255, 0.7);
+      box-shadow: 0 0 20px rgba(0, 200, 255, 0.2);
+      color: #fff;
     }
     .cta-group { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
     .btn-outline {
-      background: transparent; border: 1.5px solid rgba(0, 180, 255, 0.5); color: #b0dcff;
-      padding: 16px 40px; border-radius: 40px; font-weight: 600; font-size: 1.1rem;
-      cursor: pointer; transition: all 0.3s ease; text-decoration: none;
+      background: transparent; border: 1.5px solid rgba(0, 220, 255, 0.6);
+      color: #b8e8ff; padding: 16px 40px; border-radius: 40px;
+      font-weight: 600; font-size: 1.1rem; cursor: pointer;
+      transition: all 0.3s ease; text-decoration: none;
       display: inline-flex; align-items: center; gap: 10px;
     }
-    .btn-outline:hover { border-color: #00c8ff; background: rgba(0, 180, 255, 0.05); color: #fff; }
+    .btn-outline:hover {
+      border-color: #7fe8ff; background: rgba(0, 220, 255, 0.1);
+      color: #fff; box-shadow: 0 0 30px rgba(0, 200, 255, 0.25);
+    }
 
     .stats { display: flex; justify-content: center; gap: 60px; margin-top: 80px; flex-wrap: wrap; }
     .stat-item { text-align: center; }
     .stat-number {
       font-size: 2.8rem; font-weight: 800;
-      background: linear-gradient(135deg, #fff, #00c8ff);
+      background: linear-gradient(135deg, #fff, #7fe8ff);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2;
     }
-    .stat-label { color: #8aa8c9; font-size: 0.95rem; letter-spacing: 1px; }
+    .stat-label { color: #8ab8d8; font-size: 0.95rem; letter-spacing: 1px; }
 
     .section-header { text-align: center; margin-bottom: 60px; }
     .section-tag {
-      color: #00c8ff; font-weight: 600; font-size: 0.9rem; letter-spacing: 2px;
+      color: #7fe8ff; font-weight: 600; font-size: 0.9rem; letter-spacing: 2px;
       text-transform: uppercase; margin-bottom: 12px; display: block;
+      text-shadow: 0 0 20px rgba(0, 220, 255, 0.3);
     }
     .section-title {
       font-size: 2.8rem; font-weight: 800; letter-spacing: -1px;
-      background: linear-gradient(135deg, #ffffff, #b0d0ff);
+      background: linear-gradient(135deg, #ffffff, #a8e4ff);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px;
     }
-    .section-desc { color: #9cb9d9; font-size: 1.15rem; max-width: 700px; margin: 0 auto; }
+    .section-desc { color: #a0c4e8; font-size: 1.15rem; max-width: 700px; margin: 0 auto; }
 
     /* 客户数 */
     .global-clients {
       display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 40px;
-      background: linear-gradient(135deg, rgba(0, 30, 60, 0.5), rgba(0, 10, 30, 0.7));
-      border: 1px solid rgba(0, 180, 255, 0.2); border-radius: 24px;
-      padding: 40px 50px; backdrop-filter: blur(8px); margin-bottom: 40px;
+      background: linear-gradient(135deg, rgba(0, 50, 100, 0.5), rgba(0, 20, 50, 0.7));
+      border: 1px solid rgba(0, 200, 255, 0.3);
+      border-radius: 24px; padding: 40px 50px;
+      backdrop-filter: blur(12px); margin-bottom: 40px;
+      box-shadow: 0 0 50px rgba(0, 150, 255, 0.08);
     }
     .clients-left { display: flex; align-items: center; gap: 30px; }
     .client-count {
       font-size: 3.5rem; font-weight: 800;
-      background: linear-gradient(135deg, #fff, #00c8ff);
+      background: linear-gradient(135deg, #fff, #7fe8ff);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;
     }
-    .client-count-label { color: #8aa8c9; font-size: 1rem; letter-spacing: 1px; margin-top: 4px; }
+    .client-count-label { color: #8ab8d8; font-size: 1rem; letter-spacing: 1px; margin-top: 4px; }
     .client-icons { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; }
-    .client-icon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; color: #b0c8e0; font-size: 0.85rem; transition: all 0.3s; }
-    .client-icon-item i { font-size: 2.2rem; color: #00c8ff; filter: drop-shadow(0 0 8px rgba(0, 200, 255, 0.3)); transition: all 0.3s; }
-    .client-icon-item:hover i { color: #fff; filter: drop-shadow(0 0 16px rgba(0, 200, 255, 0.8)); transform: translateY(-3px); }
-    .client-icon-item span { color: #8aa8c9; }
+    .client-icon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; color: #b8d8f8; font-size: 0.85rem; transition: all 0.3s; }
+    .client-icon-item i {
+      font-size: 2.2rem; color: #7fe8ff;
+      filter: drop-shadow(0 0 10px rgba(0, 220, 255, 0.4));
+      transition: all 0.3s;
+    }
+    .client-icon-item:hover i {
+      color: #fff;
+      filter: drop-shadow(0 0 20px rgba(0, 240, 255, 1));
+      transform: translateY(-3px);
+    }
+    .client-icon-item span { color: #8ab8d8; }
 
     /* 核心功能 */
     .features-grid {
@@ -138,94 +189,126 @@
     }
     .feature-card {
       flex: 1 1 0; min-width: 220px;
-      background: rgba(10, 25, 45, 0.7); border: 1px solid rgba(0, 150, 255, 0.2);
-      border-radius: 20px; padding: 28px 20px; backdrop-filter: blur(8px);
+      background: rgba(12, 30, 55, 0.75);
+      border: 1px solid rgba(0, 180, 255, 0.25);
+      border-radius: 20px; padding: 28px 20px;
+      backdrop-filter: blur(10px);
       transition: all 0.3s ease; position: relative; overflow: hidden;
     }
     .feature-card::before {
       content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-      background: linear-gradient(90deg, transparent, #00c8ff, transparent);
+      background: linear-gradient(90deg, transparent, #7fe8ff, transparent);
       opacity: 0; transition: opacity 0.3s;
     }
-    .feature-card:hover { border-color: rgba(0, 200, 255, 0.5); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 100, 255, 0.15); }
+    .feature-card:hover {
+      border-color: rgba(0, 220, 255, 0.6);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 45px rgba(0, 160, 255, 0.18);
+    }
     .feature-card:hover::before { opacity: 1; }
-    .feature-icon { font-size: 2rem; color: #00c8ff; margin-bottom: 16px; filter: drop-shadow(0 0 10px rgba(0, 200, 255, 0.4)); }
+    .feature-icon {
+      font-size: 2rem; color: #7fe8ff; margin-bottom: 16px;
+      filter: drop-shadow(0 0 12px rgba(0, 220, 255, 0.5));
+    }
     .feature-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 14px; color: #fff; }
     .feature-card ul { list-style: none; padding: 0; }
-    .feature-card li { color: #b0c8e0; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; line-height: 1.4; }
-    .feature-card li i { color: #00c8ff; font-size: 0.7rem; margin-top: 5px; flex-shrink: 0; }
+    .feature-card li {
+      color: #b8d8f8; margin-bottom: 8px; display: flex; align-items: flex-start;
+      gap: 8px; font-size: 0.88rem; line-height: 1.4;
+    }
+    .feature-card li i { color: #7fe8ff; font-size: 0.7rem; margin-top: 5px; flex-shrink: 0; }
 
     /* 产品特色 */
     .product-highlight {
       display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: stretch;
-      background: linear-gradient(135deg, rgba(0, 30, 60, 0.6), rgba(0, 10, 30, 0.8));
-      border: 1px solid rgba(0, 180, 255, 0.25); border-radius: 32px; padding: 60px;
-      backdrop-filter: blur(8px); position: relative; overflow: hidden;
+      background: linear-gradient(135deg, rgba(0, 50, 100, 0.5), rgba(0, 20, 50, 0.7));
+      border: 1px solid rgba(0, 200, 255, 0.35);
+      border-radius: 32px; padding: 60px;
+      backdrop-filter: blur(12px); position: relative; overflow: hidden;
+      box-shadow: 0 0 60px rgba(0, 150, 255, 0.1);
     }
     .product-highlight::after {
-      content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(0, 200, 255, 0.1) 0%, transparent 70%);
+      content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0, 220, 255, 0.15) 0%, transparent 70%);
       border-radius: 50%; pointer-events: none;
     }
     .product-left { display: flex; flex-direction: column; justify-content: center; height: 100%; }
     .product-left h2 {
       font-size: 2.4rem; font-weight: 800; margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff, #7fd4ff);
+      background: linear-gradient(135deg, #fff, #a8e4ff);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2;
     }
-    .product-left p { color: #b0c8e0; margin-bottom: 24px; font-size: 1.05rem; }
+    .product-left p { color: #b8d8f8; margin-bottom: 24px; font-size: 1.05rem; }
     .product-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 0; }
     .product-badge {
-      background: rgba(0, 100, 255, 0.15); border: 1px solid rgba(0, 200, 255, 0.4);
-      border-radius: 20px; padding: 8px 18px; font-size: 0.85rem; font-weight: 600; color: #7fd4ff;
+      background: rgba(0, 200, 255, 0.15);
+      border: 1px solid rgba(0, 220, 255, 0.45);
+      border-radius: 20px; padding: 8px 18px; font-size: 0.85rem;
+      font-weight: 600; color: #9fe8ff;
+      transition: all 0.3s ease;
+    }
+    .product-badge:hover {
+      background: rgba(0, 220, 255, 0.25);
+      box-shadow: 0 0 20px rgba(0, 200, 255, 0.2);
     }
     .product-right { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
     .highlight-item {
       display: flex; gap: 18px; align-items: flex-start;
-      background: rgba(0, 20, 40, 0.6); border-radius: 16px; padding: 20px 22px;
-      border: 1px solid rgba(0, 150, 255, 0.15); transition: all 0.2s; flex: 1;
+      background: rgba(0, 30, 60, 0.65);
+      border-radius: 16px; padding: 20px 22px;
+      border: 1px solid rgba(0, 180, 255, 0.2);
+      transition: all 0.2s; flex: 1;
     }
-    .highlight-item:hover { border-color: rgba(0, 200, 255, 0.4); background: rgba(0, 30, 60, 0.8); }
-    .highlight-item i { font-size: 1.8rem; color: #00c8ff; flex-shrink: 0; }
+    .highlight-item:hover {
+      border-color: rgba(0, 220, 255, 0.5);
+      background: rgba(0, 40, 80, 0.85);
+    }
+    .highlight-item i { font-size: 1.8rem; color: #7fe8ff; flex-shrink: 0; }
     .highlight-item h4 { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .highlight-item p { color: #9cb9d9; font-size: 0.9rem; margin: 0; }
+    .highlight-item p { color: #a0c4e8; font-size: 0.9rem; margin: 0; }
 
     /* 产品界面展示 */
     .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 20px; }
     .gallery-item {
       position: relative; border-radius: 16px; overflow: hidden;
-      background: rgba(10, 25, 45, 0.7); border: 1px solid rgba(0, 150, 255, 0.2);
+      background: rgba(12, 30, 55, 0.75);
+      border: 1px solid rgba(0, 180, 255, 0.25);
       transition: all 0.4s ease; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); cursor: pointer;
     }
     .gallery-item::before {
       content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      box-shadow: inset 0 0 0 1px rgba(0, 200, 255, 0); transition: all 0.4s ease;
+      box-shadow: inset 0 0 0 1px rgba(0, 220, 255, 0); transition: all 0.4s ease;
       pointer-events: none; z-index: 2;
     }
     .gallery-item img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; }
     .gallery-label {
       position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px 20px 15px;
-      background: linear-gradient(to top, rgba(5, 11, 20, 0.95) 0%, rgba(5, 11, 20, 0) 100%);
+      background: linear-gradient(to top, rgba(10, 22, 40, 0.95) 0%, rgba(10, 22, 40, 0) 100%);
       color: #fff; font-weight: 600; font-size: 1rem; letter-spacing: 1px;
       z-index: 3; pointer-events: none; opacity: 0.9; transition: all 0.3s ease;
     }
-    .gallery-item:hover { border-color: rgba(0, 200, 255, 0.6); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 100, 255, 0.2); }
-    .gallery-item:hover::before { box-shadow: inset 0 0 0 1px rgba(0, 200, 255, 0.8); }
+    .gallery-item:hover {
+      border-color: rgba(0, 220, 255, 0.7);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(0, 160, 255, 0.25);
+    }
+    .gallery-item:hover::before { box-shadow: inset 0 0 0 1px rgba(0, 240, 255, 0.9); }
     .gallery-item:hover img { transform: scale(1.03); }
-    .gallery-item:hover .gallery-label { color: #00c8ff; }
+    .gallery-item:hover .gallery-label { color: #7fe8ff; }
 
     /* 灯箱 */
     .lightbox {
       display: none; position: fixed; z-index: 9999; top: 0; left: 0;
-      width: 100vw; height: 100vh; background: rgba(5, 11, 20, 0.95);
-      backdrop-filter: blur(8px); align-items: center; justify-content: center;
+      width: 100vw; height: 100vh; background: rgba(5, 15, 30, 0.96);
+      backdrop-filter: blur(10px); align-items: center; justify-content: center;
       opacity: 0; transition: opacity 0.3s ease; overflow: hidden;
       touch-action: none;
     }
     .lightbox.active { display: flex; opacity: 1; }
     .lightbox-img {
       max-width: 85vw; max-height: 85vh; border-radius: 12px;
-      box-shadow: 0 0 40px rgba(0, 200, 255, 0.4); border: 1px solid rgba(0, 200, 255, 0.5);
+      box-shadow: 0 0 50px rgba(0, 220, 255, 0.5);
+      border: 1px solid rgba(0, 220, 255, 0.6);
       transition: transform 0.3s ease, opacity 0.3s ease;
       cursor: grab; user-select: none; -webkit-user-select: none;
       will-change: transform; transform-origin: center center;
@@ -235,22 +318,25 @@
     .lightbox-img.zooming { transition: none !important; }
     .lightbox-close {
       position: absolute; top: 30px; right: 40px; color: #fff; font-size: 3rem;
-      cursor: pointer; transition: color 0.3s; line-height: 1; z-index: 10000;
+      cursor: pointer; transition: color 0.3s, text-shadow 0.3s; line-height: 1; z-index: 10000;
     }
-    .lightbox-close:hover { color: #00c8ff; text-shadow: 0 0 15px rgba(0, 200, 255, 0.8); }
+    .lightbox-close:hover { color: #7fe8ff; text-shadow: 0 0 20px rgba(0, 240, 255, 0.9); }
     .lightbox-nav {
       position: absolute; top: 50%; transform: translateY(-50%);
-      color: rgba(255, 255, 255, 0.6); font-size: 3rem; cursor: pointer;
+      color: rgba(255, 255, 255, 0.65); font-size: 3rem; cursor: pointer;
       padding: 20px; transition: all 0.3s ease; z-index: 10000; user-select: none;
     }
-    .lightbox-nav:hover { color: #00c8ff; text-shadow: 0 0 15px rgba(0, 200, 255, 0.8); transform: translateY(-50%) scale(1.1); }
+    .lightbox-nav:hover {
+      color: #7fe8ff; text-shadow: 0 0 20px rgba(0, 240, 255, 0.9);
+      transform: translateY(-50%) scale(1.1);
+    }
     .lightbox-prev { left: 20px; }
     .lightbox-next { right: 20px; }
     .lightbox-hint {
       position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
-      color: rgba(176, 220, 255, 0.75); font-size: 0.85rem; letter-spacing: 1px;
-      background: rgba(5, 11, 20, 0.6); padding: 8px 18px; border-radius: 30px;
-      border: 1px solid rgba(0, 200, 255, 0.25); backdrop-filter: blur(4px);
+      color: rgba(180, 230, 255, 0.8); font-size: 0.85rem; letter-spacing: 1px;
+      background: rgba(10, 25, 45, 0.7); padding: 8px 18px; border-radius: 30px;
+      border: 1px solid rgba(0, 220, 255, 0.35); backdrop-filter: blur(4px);
       pointer-events: none; z-index: 10000; white-space: nowrap;
     }
 
@@ -258,43 +344,54 @@
     #advantages { margin-top: 40px; }
     .advantage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .advantage-card {
-      background: rgba(8, 20, 40, 0.7); border-radius: 20px; padding: 30px;
-      border: 1px solid rgba(0, 150, 255, 0.15); transition: all 0.3s;
+      background: rgba(12, 30, 55, 0.75); border-radius: 20px; padding: 30px;
+      border: 1px solid rgba(0, 180, 255, 0.2);
+      transition: all 0.3s;
     }
-    .advantage-card:hover { border-color: rgba(0, 200, 255, 0.4); background: rgba(12, 30, 55, 0.8); transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0, 80, 200, 0.12); }
+    .advantage-card:hover {
+      border-color: rgba(0, 220, 255, 0.55);
+      background: rgba(15, 38, 68, 0.85);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 140, 255, 0.15);
+    }
     .advantage-icon {
-      width: 56px; height: 56px; border-radius: 14px; background: rgba(0, 150, 255, 0.15);
-      display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
-      color: #00c8ff; margin-bottom: 24px; border: 1px solid rgba(0, 200, 255, 0.2);
+      width: 56px; height: 56px; border-radius: 14px;
+      background: rgba(0, 180, 255, 0.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; color: #7fe8ff; margin-bottom: 24px;
+      border: 1px solid rgba(0, 220, 255, 0.3);
     }
     .advantage-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; color: #fff; }
-    .advantage-card p { color: #9cb9d9; font-size: 0.95rem; }
+    .advantage-card p { color: #a0c4e8; font-size: 0.95rem; }
 
     /* 产品愿景 */
     #ecosystem { padding-top: 40px; }
     .eco-banner {
-      background: linear-gradient(135deg, rgba(0, 50, 100, 0.4), rgba(0, 20, 40, 0.6));
-      border-radius: 30px; padding: 60px; border: 1px solid rgba(0, 180, 255, 0.25);
+      background: linear-gradient(135deg, rgba(0, 80, 160, 0.4), rgba(0, 30, 70, 0.6));
+      border-radius: 30px; padding: 60px;
+      border: 1px solid rgba(0, 200, 255, 0.35);
       display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 30px; backdrop-filter: blur(8px);
+      flex-wrap: wrap; gap: 30px; backdrop-filter: blur(12px);
+      box-shadow: 0 0 60px rgba(0, 150, 255, 0.1);
     }
     .eco-banner h2 {
       font-size: 2.2rem; font-weight: 800; max-width: 500px;
-      background: linear-gradient(135deg, #fff, #7fd4ff);
+      background: linear-gradient(135deg, #fff, #a8e4ff);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .eco-banner p { color: #b0c8e0; max-width: 500px; margin-top: 12px; }
+    .eco-banner p { color: #b8d8f8; max-width: 500px; margin-top: 12px; }
     .stars-badge {
       display: flex; align-items: center; gap: 15px; color: #fff; font-size: 1.1rem;
-      background: rgba(0, 0, 0, 0.3); padding: 15px 30px; border-radius: 50px;
-      border: 1px solid rgba(0, 200, 255, 0.3);
+      background: rgba(0, 0, 0, 0.25); padding: 15px 30px; border-radius: 50px;
+      border: 1px solid rgba(0, 220, 255, 0.4);
+      box-shadow: 0 0 30px rgba(0, 200, 255, 0.15);
     }
-    .stars-badge i { color: #ffd700; font-size: 1.5rem; }
+    .stars-badge i { color: #ffd966; font-size: 1.5rem; text-shadow: 0 0 15px rgba(255, 200, 50, 0.6); }
 
     .footer-bottom {
-      border-top: 1px solid rgba(0, 150, 255, 0.15); padding: 30px 0;
+      border-top: 1px solid rgba(0, 180, 255, 0.2); padding: 30px 0;
       display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap;
-      gap: 20px; color: #6a8aaa; font-size: 0.9rem; margin-top: 40px;
+      gap: 20px; color: #7aa8cc; font-size: 0.9rem; margin-top: 40px;
     }
 
     /* 响应式 */
@@ -305,7 +402,7 @@
     }
     @media (max-width: 900px) {
       .hero h1 { font-size: 2.8rem; }
-      .navbar { flex-direction: column; gap: 16px; }
+      .navbar { flex-direction: column; gap: 12px; padding: 12px 0; }
       .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
       .product-highlight { grid-template-columns: 1fr; padding: 30px; }
       .product-left { margin-bottom: 30px; }
@@ -321,11 +418,13 @@
       .lightbox-close { top: 20px; right: 20px; font-size: 2.5rem; }
       .lightbox-nav { font-size: 2.5rem; padding: 10px; }
       .footer-bottom { justify-content: center; }
+      .logo img { width: 56px; height: 55px; }
     }
     @media (max-width: 600px) {
       .feature-card { flex: 1 1 100%; }
       .advantage-grid { grid-template-columns: 1fr; }
       .lightbox-hint { font-size: 0.75rem; padding: 6px 12px; }
+      .logo img { width: 48px; height: 47px; }
     }
     @media (max-width: 500px) {
       .hero h1 { font-size: 2.2rem; }
@@ -339,9 +438,12 @@
   <div class="grid-bg"></div>
   <div class="glow-orb"></div>
   <div class="glow-orb-2"></div>
+  <div class="glow-orb-3"></div>
 
   <nav class="navbar container">
-    <div class="logo"><i class="fas fa-cube"></i><span>AnutaERP</span></div>
+    <a class="logo" href="#" aria-label="AnutaERP 首页">
+      <img src="anuta.png" alt="AnutaERP Logo" width="64" height="63">
+    </a>
     <div class="nav-links">
       <a href="#features">核心功能</a>
       <a href="#china">产品特色</a>
@@ -576,7 +678,7 @@
         <i class="fas fa-award"></i>
         <div>
           <div style="font-weight: 700;">AnutaERP 企业级套件</div>
-          <div style="font-size: 0.85rem; color: #b0c8e0;">持续进化中</div>
+          <div style="font-size: 0.85rem; color: #b8d8f8;">持续进化中</div>
         </div>
       </div>
     </div>
@@ -608,12 +710,10 @@
     let scale = 1;
     let tx = 0, ty = 0;
 
-    /* 应用 transform */
     function applyTransform() {
       lightboxImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
     }
 
-    /* 复位 */
     function resetTransform(animate = false) {
       scale = 1; tx = 0; ty = 0;
       if (animate) {
@@ -627,7 +727,6 @@
       }
     }
 
-    /* 打开 */
     function openLightbox(index) {
       currentIndex = index;
       updateLightboxImage();
@@ -637,7 +736,6 @@
       document.body.style.overflow = 'hidden';
     }
 
-    /* 关闭 */
     function closeLightbox() {
       lightbox.classList.remove('active');
       setTimeout(() => {
@@ -648,7 +746,6 @@
       document.body.style.overflow = 'auto';
     }
 
-    /* 切换图片 */
     function changeImage(direction, event) {
       if (event) event.stopPropagation();
       currentIndex = (currentIndex + direction + images.length) % images.length;
@@ -664,7 +761,7 @@
       lightboxImg.src = images[currentIndex];
     }
 
-    /* ================= 桌面端：鼠标滚轮缩放 + 拖拽 ================= */
+    /* 桌面端：滚轮缩放 */
     lightbox.addEventListener('wheel', function (e) {
       if (e.target.classList.contains('lightbox-nav') || e.target.classList.contains('lightbox-close')) return;
       e.preventDefault();
@@ -682,6 +779,7 @@
       requestAnimationFrame(() => lightboxImg.classList.remove('zooming'));
     }, { passive: false });
 
+    /* 桌面端：拖拽 */
     let isDragging = false;
     let dragMoved = false;
     let startX = 0, startY = 0, startTx = 0, startTy = 0;
@@ -718,15 +816,14 @@
       }
     });
 
-    /* ================= 移动端：触摸事件（微信/手机浏览器） ================= */
-    let touchMode = 'none';     // 'none' | 'drag' | 'pinch'
+    /* 移动端：触摸拖拽 + 双指缩放 */
+    let touchMode = 'none';
     let touchStartX = 0, touchStartY = 0;
     let touchStartTx = 0, touchStartTy = 0;
     let touchStartDist = 0;
     let touchStartScale = 1;
     let touchStartMidX = 0, touchStartMidY = 0;
     let lastTapTime = 0;
-    let singleTapTimer = null;
 
     function getDistance(t1, t2) {
       const dx = t1.clientX - t2.clientX;
@@ -734,10 +831,7 @@
       return Math.sqrt(dx * dx + dy * dy);
     }
     function getMidpoint(t1, t2) {
-      return {
-        x: (t1.clientX + t2.clientX) / 2,
-        y: (t1.clientY + t2.clientY) / 2
-      };
+      return { x: (t1.clientX + t2.clientX) / 2, y: (t1.clientY + t2.clientY) / 2 };
     }
 
     lightboxImg.addEventListener('touchstart', function (e) {
@@ -745,19 +839,16 @@
       e.preventDefault();
 
       if (e.touches.length === 1) {
-        // 单指拖拽
         touchMode = 'drag';
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
         touchStartTx = tx;
         touchStartTy = ty;
       } else if (e.touches.length === 2) {
-        // 双指捏合
         touchMode = 'pinch';
         touchStartDist = getDistance(e.touches[0], e.touches[1]);
         touchStartScale = scale;
         const mid = getMidpoint(e.touches[0], e.touches[1]);
-        // 记录双指中点相对图片中心的位置（用于缩放焦点）
         const rect = lightboxImg.getBoundingClientRect();
         touchStartMidX = mid.x - (rect.left + rect.width / 2);
         touchStartMidY = mid.y - (rect.top + rect.height / 2);
@@ -778,13 +869,10 @@
         const dist = getDistance(e.touches[0], e.touches[1]);
         const ratio = dist / touchStartDist;
         let newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, touchStartScale * ratio));
-
-        // 以双指中点为焦点缩放
         const scaleRatio = newScale / scale;
         tx = tx - touchStartMidX * (scaleRatio - 1);
         ty = ty - touchStartMidY * (scaleRatio - 1);
         scale = newScale;
-
         applyTransform();
       }
     }, { passive: false });
@@ -792,31 +880,24 @@
     lightboxImg.addEventListener('touchend', function (e) {
       if (touchMode === 'none') return;
 
-      // 处理单指轻点（双击放大 / 复位）
       if (touchMode === 'drag' && e.changedTouches.length === 1) {
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
         const moved = Math.abs(dx) > 10 || Math.abs(dy) > 10;
-
         if (!moved) {
           const now = Date.now();
           if (now - lastTapTime < 300) {
-            // 双击
-            if (singleTapTimer) { clearTimeout(singleTapTimer); singleTapTimer = null; }
             handleDoubleTap(e.changedTouches[0]);
             lastTapTime = 0;
           } else {
             lastTapTime = now;
-            // 延迟执行单击逻辑（这里不需要单击，略过）
           }
         }
       }
 
-      // 如果所有手指都离开，重置模式
       if (e.touches.length === 0) {
         touchMode = 'none';
       } else if (e.touches.length === 1) {
-        // 双指变单指：切换为拖拽
         touchMode = 'drag';
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
@@ -825,7 +906,6 @@
       }
     }, { passive: false });
 
-    /* 双击处理（触摸端） */
     function handleDoubleTap(touch) {
       if (scale > 1.01) {
         resetTransform(true);
@@ -878,7 +958,7 @@
       else if (e.key === '0') resetTransform(true);
     });
 
-    /* 阻止 iOS 双击页面缩放（避免干扰灯箱双击） */
+    /* 阻止 iOS 双击页面缩放 */
     let lastTouchEnd = 0;
     document.addEventListener('touchend', function (e) {
       if (!lightbox.classList.contains('active')) return;
