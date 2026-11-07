@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnutaERP | 一体化智能 ERP 系统</title>
+  <!-- 字体与图标库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #050b14;
+      color: #eaf2ff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* 科技感背景网格 & 光晕 */
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 180, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 180, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-orb {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 150, 255, 0.15) 0%, rgba(0, 50, 150, 0) 70%);
+      top: -200px;
+      right: -200px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .glow-orb-2 {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 200, 255, 0.1) 0%, rgba(0, 30, 100, 0) 70%);
+      bottom: -150px;
+      left: -150px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* 导航栏 */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(0, 180, 255, 0.2);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 11, 20, 0.7);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    .logo i {
+      color: #00c8ff;
+      font-size: 2rem;
+      filter: drop-shadow(0 0 8px rgba(0, 200, 255, 0.8));
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, #ffffff 0%, #8dd0ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #b8d4f0;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #00c8ff;
+    }
+
+    .contact-btn {
+      background: linear-gradient(135deg, #0066ff, #00c8ff);
+      border: none;
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0, 150, 255, 0.4);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .contact-btn:hover {
+      box-shadow: 0 0 30px rgba(0, 200, 255, 0.7);
+      transform: translateY(-2px);
+    }
+
+    /* 统一板块间距 */
+    section {
+      padding: 50px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* 英雄区 */
+    .hero {
+      padding-top: 40px;
+      padding-bottom: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-badge {
+      background: rgba(0, 180, 255, 0.15);
+      border: 1px solid rgba(0, 200, 255, 0.3);
+      border-radius: 40px;
+      padding: 6px 18px;
+      font-size: 0.85rem;
+      color: #7fd4ff;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      display: inline-block;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero h1 {
+      font-size: 4.2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+      max-width: 900px;
+      background: linear-gradient(135deg, #ffffff 0%, #a0d0ff 70%, #00aaff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.25rem;
+      color: #9cb9d9;
+      max-width: 720px;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .hero-highlight {
+      color: #00c8ff;
+      font-weight: 600;
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 30px 0 40px;
+    }
+
+    .tag {
+      background: rgba(0, 100, 255, 0.1);
+      border: 1px solid rgba(0, 180, 255, 0.3);
+      border-radius: 30px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #b0dcff;
+      backdrop-filter: blur(4px);
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0066ff, #00c8ff);
+      border: none;
+      color: #fff;
+      padding: 16px 40px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(0, 150, 255, 0.5);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 40px rgba(0, 200, 255, 0.8);
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid rgba(0, 180, 255, 0.5);
+      color: #b0dcff;
+      padding: 16px 40px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-outline:hover {
+      border-color: #00c8ff;
+      background: rgba(0, 180, 255, 0.05);
+      color: #fff;
+    }
+
+    /* 统计数字 */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-top: 80px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #00c8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      color: #8aa8c9;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-tag {
+      color: #00c8ff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #ffffff, #b0d0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: #9cb9d9;
+      font-size: 1.15rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* 客户数 & 典型客户图标栏 */
+    .global-clients {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      background: linear-gradient(135deg, rgba(0, 30, 60, 0.5), rgba(0, 10, 30, 0.7));
+      border: 1px solid rgba(0, 180, 255, 0.2);
+      border-radius: 24px;
+      padding: 40px 50px;
+      backdrop-filter: blur(8px);
+      margin-bottom: 40px;
+    }
+
+    .clients-left {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .client-count {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #00c8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .client-count-label {
+      color: #8aa8c9;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .client-icons {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      flex-wrap: wrap;
+    }
+
+    .client-icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #b0c8e0;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+
+    .client-icon-item i {
+      font-size: 2.2rem;
+      color: #00c8ff;
+      filter: drop-shadow(0 0 8px rgba(0, 200, 255, 0.3));
+      transition: all 0.3s;
+    }
+
+    .client-icon-item:hover i {
+      color: #fff;
+      filter: drop-shadow(0 0 16px rgba(0, 200, 255, 0.8));
+      transform: translateY(-3px);
+    }
+
+    .client-icon-item span {
+      color: #8aa8c9;
+    }
+
+    /* 核心功能卡片 — 强制在一行 */
+    .features-grid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 24px;
+      justify-content: center;
+      align-items: stretch;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .feature-card {
+      flex: 1 1 0;
+      min-width: 220px;
+      background: rgba(10, 25, 45, 0.7);
+      border: 1px solid rgba(0, 150, 255, 0.2);
+      border-radius: 20px;
+      padding: 28px 20px;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #00c8ff, transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(0, 200, 255, 0.5);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 100, 255, 0.15);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      color: #00c8ff;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 0 10px rgba(0, 200, 255, 0.4));
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+
+    .feature-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .feature-card li {
+      color: #b0c8e0;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+
+    .feature-card li i {
+      color: #00c8ff;
+      font-size: 0.7rem;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1000px) {
+      .features-grid {
+        flex-wrap: wrap;
+        overflow-x: visible;
+      }
+      .feature-card {
+        flex: 1 1 calc(50% - 12px);
+        min-width: 240px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .feature-card {
+        flex: 1 1 100%;
+      }
+    }
+
+    /* 产品特色板块 */
+    .product-highlight {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: stretch;
+      background: linear-gradient(135deg, rgba(0, 30, 60, 0.6), rgba(0, 10, 30, 0.8));
+      border: 1px solid rgba(0, 180, 255, 0.25);
+      border-radius: 32px;
+      padding: 60px;
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-highlight::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 200, 255, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .product-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .product-left h2 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff, #7fd4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .product-left p {
+      color: #b0c8e0;
+      margin-bottom: 24px;
+      font-size: 1.05rem;
+    }
+
+    .product-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 0;
+    }
+
+    .product-badge {
+      background: rgba(0, 100, 255, 0.15);
+      border: 1px solid rgba(0, 200, 255, 0.4);
+      border-radius: 20px;
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #7fd4ff;
+    }
+
+    .product-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .highlight-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      background: rgba(0, 20, 40, 0.6);
+      border-radius: 16px;
+      padding: 20px 22px;
+      border: 1px solid rgba(0, 150, 255, 0.15);
+      transition: all 0.2s;
+      flex: 1;
+    }
+
+    .highlight-item:hover {
+      border-color: rgba(0, 200, 255, 0.4);
+      background: rgba(0, 30, 60, 0.8);
+    }
+
+    .highlight-item i {
+      font-size: 1.8rem;
+      color: #00c8ff;
+      flex-shrink: 0;
+    }
+
+    .highlight-item h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .highlight-item p {
+      color: #9cb9d9;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* ================= 产品界面展示 ================= */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-top: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(10, 25, 45, 0.7);
+      border: 1px solid rgba(0, 150, 255, 0.2);
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 0 1px rgba(0, 200, 255, 0);
+      transition: all 0.4s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 30px 20px 15px;
+      background: linear-gradient(to top, rgba(5, 11, 20, 0.95) 0%, rgba(5, 11, 20, 0) 100%);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0.9;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      border-color: rgba(0, 200, 255, 0.6);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 100, 255, 0.2);
+    }
+
+    .gallery-item:hover::before {
+      box-shadow: inset 0 0 0 1px rgba(0, 200, 255, 0.8);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+
+    .gallery-item:hover .gallery-label {
+      color: #00c8ff;
+    }
+
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    /* 核心优势：与上方大框增加额外间隔 */
+    #advantages {
+      margin-top: 40px;
+    }
+
+    .advantage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .advantage-card {
+      background: rgba(8, 20, 40, 0.7);
+      border-radius: 20px;
+      padding: 30px;
+      border: 1px solid rgba(0, 150, 255, 0.15);
+      transition: all 0.3s;
+    }
+
+    .advantage-card:hover {
+      border-color: rgba(0, 200, 255, 0.4);
+      background: rgba(12, 30, 55, 0.8);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(0, 80, 200, 0.12);
+    }
+
+    .advantage-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: rgba(0, 150, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #00c8ff;
+      margin-bottom: 24px;
+      border: 1px solid rgba(0, 200, 255, 0.2);
+    }
+
+    .advantage-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .advantage-card p {
+      color: #9cb9d9;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1000px) {
+      .advantage-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .advantage-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 产品愿景板块 */
+    #ecosystem {
+      padding-top: 40px;
+    }
+
+    .eco-banner {
+      background: linear-gradient(135deg, rgba(0, 50, 100, 0.4), rgba(0, 20, 40, 0.6));
+      border-radius: 30px;
+      padding: 60px;
+      border: 1px solid rgba(0, 180, 255, 0.25);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      backdrop-filter: blur(8px);
+    }
+
+    .eco-banner h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      max-width: 500px;
+      background: linear-gradient(135deg, #fff, #7fd4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .eco-banner p {
+      color: #b0c8e0;
+      max-width: 500px;
+      margin-top: 12px;
+    }
+
+    .stars-badge {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: #fff;
+      font-size: 1.1rem;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px 30px;
+      border-radius: 50px;
+      border: 1px solid rgba(0, 200, 255, 0.3);
+    }
+
+    .stars-badge i {
+      color: #ffd700;
+      font-size: 1.5rem;
+    }
+
+    /* 联系方式 & 页脚 */
+    .contact-section {
+      padding: 50px 0 40px;
+      text-align: center;
+    }
+
+    .contact-methods {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+      margin: 40px 0;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1.2rem;
+      color: #eaf2ff;
+      background: rgba(0, 30, 60, 0.5);
+      padding: 18px 32px;
+      border-radius: 60px;
+      border: 1px solid rgba(0, 180, 255, 0.3);
+      transition: all 0.3s;
+    }
+
+    .contact-item:hover {
+      border-color: #00c8ff;
+      box-shadow: 0 0 25px rgba(0, 150, 255, 0.3);
+    }
+
+    .contact-item i {
+      color: #00c8ff;
+      font-size: 1.6rem;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(0, 150, 255, 0.15);
+      padding: 30px 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      color: #6a8aaa;
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom a {
+      color: #7fb8e0;
+      text-decoration: none;
+    }
+
+    /* 响应式 */
+    @media (max-width: 900px) {
+      .hero h1 { font-size: 2.8rem; }
+      .navbar { flex-direction: column; gap: 16px; }
+      .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
+      .product-highlight { grid-template-columns: 1fr; padding: 30px; }
+      .product-left { margin-bottom: 30px; }
+      .section-title { font-size: 2.2rem; }
+      .eco-banner { flex-direction: column; text-align: center; }
+      .stats { gap: 30px; }
+      #advantages { margin-top: 30px; }
+      #ecosystem { padding-top: 30px; }
+      .global-clients { flex-direction: column; text-align: center; padding: 30px; }
+      .clients-left { justify-content: center; }
+      .client-icons { justify-content: center; }
+    }
+
+    @media (max-width: 500px) {
+      .hero h1 { font-size: 2.2rem; }
+      .btn-primary, .btn-outline { padding: 14px 28px; font-size: 1rem; }
+      .contact-item { padding: 14px 20px; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 装饰背景 -->
+  <div class="grid-bg"></div>
+  <div class="glow-orb"></div>
+  <div class="glow-orb-2"></div>
+
+  <!-- 导航栏 -->
+  <nav class="navbar container">
+    <div class="logo">
+      <i class="fas fa-cube"></i>
+      <span>AnutaERP</span>
+    </div>
+    <div class="nav-links">
+      <a href="#features">核心功能</a>
+      <a href="#china">产品特色</a>
+      <a href="#interface">产品界面</a>
+      <a href="#advantages">核心优势</a>
+      <a href="#ecosystem">产品愿景</a>
+      <a href="#contact" class="contact-btn">联系我们</a>
+    </div>
+  </nav>
+
+  <!-- 英雄区 -->
+  <section class="hero container">
+    <div class="hero-badge">
+      <i class="fas fa-bolt" style="margin-right: 6px;"></i> 一体化 · 智能化 · 可定制
+    </div>
+    <h1>您唯一需要的<br>ERP 系统</h1>
+    <p class="hero-sub">
+      用户友好 · 支持定制 · 一体化平台<br>
+      <span class="hero-highlight">智能核心引擎，灵活适配业务</span><br>
+      <span class="hero-highlight">覆盖企业经营管理全场景</span>
+    </p>
+    <div class="hero-tags">
+      <span class="tag"><i class="fas fa-check-circle" style="margin-right: 6px;"></i> 财务会计</span>
+      <span class="tag"><i class="fas fa-check-circle" style="margin-right: 6px;"></i> 订单管理</span>
+      <span class="tag"><i class="fas fa-check-circle" style="margin-right: 6px;"></i> 制造</span>
+      <span class="tag"><i class="fas fa-check-circle" style="margin-right: 6px;"></i> 资产管理</span>
+      <span class="tag"><i class="fas fa-check-circle" style="margin-right: 6px;"></i> 项目</span>
+    </div>
+    <div class="cta-group">
+      <a href="#contact" class="btn-primary"><i class="fas fa-rocket"></i> 免费试用 / 咨询</a>
+      <a href="#features" class="btn-outline"><i class="fas fa-arrow-down"></i> 了解功能</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">一体化管理</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0</div>
+        <div class="stat-label">席位收费陷阱</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">全场景</div>
+        <div class="stat-label">企业经营管理覆盖</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 客户数 & 典型客户图标 -->
+  <div class="container">
+    <div class="global-clients">
+      <div class="clients-left">
+        <div>
+          <div class="client-count">5,000+</div>
+          <div class="client-count-label">客户实例</div>
+        </div>
+      </div>
+      <div class="client-icons">
+        <div class="client-icon-item">
+          <i class="fas fa-industry"></i>
+          <span>制造业</span>
+        </div>
+        <div class="client-icon-item">
+          <i class="fas fa-store"></i>
+          <span>零售业</span>
+        </div>
+        <div class="client-icon-item">
+          <i class="fas fa-hospital"></i>
+          <span>医疗健康</span>
+        </div>
+        <div class="client-icon-item">
+          <i class="fas fa-truck"></i>
+          <span>物流运输</span>
+        </div>
+        <div class="client-icon-item">
+          <i class="fas fa-building"></i>
+          <span>专业服务</span>
+        </div>
+        <div class="client-icon-item">
+          <i class="fas fa-graduation-cap"></i>
+          <span>教育机构</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心功能 -->
+  <section id="features" class="container">
+    <div class="section-header">
+      <span class="section-tag">核心功能</span>
+      <h2 class="section-title">在单一一体化平台上<br>运行您的完整业务</h2>
+      <p class="section-desc">从财务会计到制造，AnutaERP 提供功能全面、用户友好的 ERP 解决方案。</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-calculator"></i></div>
+        <h3>财务会计</h3>
+        <ul>
+          <li><i class="fas fa-circle"></i> 多财务主体、多币种核算</li>
+          <li><i class="fas fa-circle"></i> 智能总账管理</li>
+          <li><i class="fas fa-circle"></i> 应收账款 / 应付账款自动化</li>
+          <li><i class="fas fa-circle"></i> 自动化全套财务报表</li>
+          <li><i class="fas fa-circle"></i> 固定资产全生命周期管理</li>
+          <li><i class="fas fa-circle"></i> 税务与本地法规合规支持</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-shopping-cart"></i></div>
+        <h3>订单管理</h3>
+        <ul>
+          <li><i class="fas fa-circle"></i> 跟踪库存水平，补充库存</li>
+          <li><i class="fas fa-circle"></i> 管理销售订单、客户、供应商</li>
+          <li><i class="fas fa-circle"></i> 发货、交付和订单履行</li>
+          <li><i class="fas fa-circle"></i> 实时库存与销售分析</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-industry"></i></div>
+        <h3>制造</h3>
+        <ul>
+          <li><i class="fas fa-circle"></i> 简化生产周期</li>
+          <li><i class="fas fa-circle"></i> 跟踪物料消耗</li>
+          <li><i class="fas fa-circle"></i> 产能规划</li>
+          <li><i class="fas fa-circle"></i> 处理分包</li>
+          <li><i class="fas fa-circle"></i> BOM 管理与工单</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
+        <h3>资产与项目</h3>
+        <ul>
+          <li><i class="fas fa-circle"></i> 从采购到处置的资产管理</li>
+          <li><i class="fas fa-circle"></i> IT 基础设施到设备管理</li>
+          <li><i class="fas fa-circle"></i> 内部与外部项目按时交付</li>
+          <li><i class="fas fa-circle"></i> 跟踪任务、时间表与问题</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 产品特色 -->
+  <section id="china" class="container">
+    <div class="product-highlight">
+      <div class="product-left">
+        <span class="section-tag" style="text-align: left; display: block;">产品特色</span>
+        <h2>深度适配企业经营管理</h2>
+        <p>AnutaERP 基于对企业业务场景的深入理解，提供覆盖财务、供应链、制造、项目等核心领域的全流程管理能力。通过灵活的配置与智能引擎，帮助企业实现精细化运营与数字化转型。</p>
+        <div class="product-badges">
+          <span class="product-badge">✓ 智能财务核算</span>
+          <span class="product-badge">✓ 供应链协同</span>
+          <span class="product-badge">✓ 精益生产管理</span>
+          <span class="product-badge">✓ 项目全周期管控</span>
+          <span class="product-badge">✓ 数据驱动决策</span>
+        </div>
+      </div>
+      <div class="product-right">
+        <div class="highlight-item">
+          <i class="fas fa-file-invoice"></i>
+          <div>
+            <h4>智能财务与税务管理</h4>
+            <p>自动化财务核算与税务处理，提升财务效率，降低合规风险。</p>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <i class="fas fa-balance-scale"></i>
+          <div>
+            <h4>合规与审计追踪</h4>
+            <p>内置完整的审计日志与权限控制，满足企业内控与外部审计要求。</p>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <i class="fas fa-chart-line"></i>
+          <div>
+            <h4>实时经营分析</h4>
+            <p>多维数据分析与可视化报表，助力管理层快速洞察经营状况。</p>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <i class="fas fa-shield-alt"></i>
+          <div>
+            <h4>安全可控的部署方案</h4>
+            <p>支持公有云、私有云及本地化部署，保障企业数据安全与自主可控。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 产品界面展示 -->
+  <section id="interface" class="container">
+    <div class="section-header">
+      <span class="section-tag">产品界面</span>
+      <h2 class="section-title">直观、现代化的操作体验</h2>
+      <p class="section-desc">从财务到生产，AnutaERP 的每一个模块都经过精心设计，提供极致的用户交互体验。</p>
+    </div>
+    
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="1.png" alt="会计模块界面">
+        <div class="gallery-label"><i class="fas fa-calculator" style="margin-right:8px;"></i> 财务会计管理</div>
+      </div>
+      <div class="gallery-item">
+        <img src="2.png" alt="销售模块界面">
+        <div class="gallery-label"><i class="fas fa-shopping-cart" style="margin-right:8px;"></i> 销售订单管理</div>
+      </div>
+      <div class="gallery-item">
+        <img src="3.png" alt="采购模块界面">
+        <div class="gallery-label"><i class="fas fa-file-invoice-dollar" style="margin-right:8px;"></i> 供应商与采购</div>
+      </div>
+      <div class="gallery-item">
+        <img src="4.png" alt="库存模块界面">
+        <div class="gallery-label"><i class="fas fa-boxes" style="margin-right:8px;"></i> 库存与仓储</div>
+      </div>
+      <div class="gallery-item">
+        <img src="5.png" alt="生产模块界面">
+        <div class="gallery-label"><i class="fas fa-industry" style="margin-right:8px;"></i> 生产与制造</div>
+      </div>
+      <div class="gallery-item">
+        <img src="6.png" alt="项目模块界面">
+        <div class="gallery-label"><i class="fas fa-tasks" style="margin-right:8px;"></i> 项目与任务</div>
+      </div>
+      <div class="gallery-item">
+        <img src="7.png" alt="资产模块界面">
+        <div class="gallery-label"><i class="fas fa-building" style="margin-right:8px;"></i> 固定资产管理</div>
+      </div>
+      <div class="gallery-item">
+        <img src="8.png" alt="质量模块界面">
+        <div class="gallery-label"><i class="fas fa-award" style="margin-right:8px;"></i> 质量管理控制</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 核心优势 -->
+  <section id="advantages" class="container">
+    <div class="section-header">
+      <span class="section-tag">核心优势</span>
+      <h2 class="section-title">助力企业数字转型，平稳迈向未来</h2>
+      <p class="section-desc">无席位收费陷阱，深度自由定制，企业级安全防护，完全打破技术捆绑锁死。</p>
+    </div>
+    <div class="advantage-grid">
+      <div class="advantage-card">
+        <div class="advantage-icon"><i class="fas fa-layer-group"></i></div>
+        <h3>单一应用，全面掌控整体业务</h3>
+        <p>AnutaERP 功能极其丰富，从制造到服务业，从初创小微企业到大型集团企业，都能完美契合。各模块原生无缝集成。</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon"><i class="fas fa-chart-bar"></i></div>
+        <h3>无席位收费陷阱；仅需为实际托管买单</h3>
+        <p>您只需为真正使用的云服务支付固定托管费用，IT 成本绝不会随着员工规模扩大而线性激增。</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon"><i class="fas fa-paint-brush"></i></div>
+        <h3>深度自由定制；低代码 / 无代码体验</h3>
+        <p>根据团队工作习惯自由设计表单样式、数据报表、打印模版和可视化仪表盘，通过拖拽交互实现工作流自动化。</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon"><i class="fas fa-shield-virus"></i></div>
+        <h3>企业级安全防护与隐私合规</h3>
+        <p>严格符合 ISO 27001 信息安全管理体系与 GDPR 隐私条例，提供双因素认证、内网 IP 访问限制及字段级细粒度角色权限控制。</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon"><i class="fas fa-unlock-alt"></i></div>
+        <h3>完全打破软件厂商的技术捆绑锁死</h3>
+        <p>可选择官方云托管，也可私有化部署在自有服务器或私有云中，未来拥有绝对的自由话语权。</p>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon"><i class="fas fa-rocket"></i></div>
+        <h3>快速部署，敏捷响应业务变化</h3>
+        <p>模块化设计支持快速迭代与敏捷交付，帮助企业紧跟市场节奏与法规更新，降低长期维护成本。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 产品愿景 -->
+  <section id="ecosystem" class="container">
+    <div class="eco-banner">
+      <div>
+        <span class="section-tag" style="text-align: left;">持续创新 = 深耕企业服务 + 技术驱动</span>
+        <h2>AnutaERP 仅仅是一个开始</h2>
+        <p>我们正在持续打造更多企业级应用，涵盖AI智能体、商业智能（BI）分析、网站构建器、在线学习管理系统（LMS）、团队协作沟通工具等。</p>
+      </div>
+      <div class="stars-badge">
+        <i class="fas fa-award"></i>
+        <div>
+          <div style="font-weight: 700;">AnutaERP 企业级套件</div>
+          <div style="font-size: 0.85rem; color: #b0c8e0;">持续进化中</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系方式（仅微信） -->
+  <section id="contact" class="container contact-section">
+    <div class="section-header">
+      <span class="section-tag">联系我们</span>
+      <h2 class="section-title">准备好切换到<br>下一代 AnutaERP 了吗？</h2>
+      <p class="section-desc">为您提供实施与支持服务，确保企业灵活调整并紧跟业务变化。</p>
+    </div>
+    <div class="contact-methods">
+      <div class="contact-item">
+        <i class="fab fa-weixin"></i>
+        <span>微信：18102826948</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="container">
+    <div class="footer-bottom">
+      <div>© 2026 AnutaERP · 企业级管理软件</div>
+      <div>
+        <a href="#" style="margin-right: 20px;"><i class="fas fa-file-alt"></i> 产品白皮书</a>
+        <a href="#"><i class="fas fa-globe"></i> 官方网站</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
