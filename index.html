@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnutaERP | 一体化智能 ERP 系统</title>
+  <title>AnutaERP | 可深度定制的智能ERP系统</title>
   <!-- 字体与图标库 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -124,26 +124,6 @@
       color: #00c8ff;
     }
 
-    .contact-btn {
-      background: linear-gradient(135deg, #0066ff, #00c8ff);
-      border: none;
-      color: #fff;
-      padding: 10px 22px;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(0, 150, 255, 0.4);
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .contact-btn:hover {
-      box-shadow: 0 0 30px rgba(0, 200, 255, 0.7);
-      transform: translateY(-2px);
-    }
-
     /* 统一板块间距 */
     section {
       padding: 50px 0;
@@ -224,28 +204,6 @@
       gap: 20px;
       flex-wrap: wrap;
       justify-content: center;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #0066ff, #00c8ff);
-      border: none;
-      color: #fff;
-      padding: 16px 40px;
-      border-radius: 40px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-      box-shadow: 0 0 30px rgba(0, 150, 255, 0.5);
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-primary:hover {
-      box-shadow: 0 0 40px rgba(0, 200, 255, 0.8);
-      transform: translateY(-3px);
     }
 
     .btn-outline {
@@ -631,6 +589,7 @@
       border: 1px solid rgba(0, 150, 255, 0.2);
       transition: all 0.4s ease;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
     }
 
     .gallery-item::before {
@@ -693,6 +652,87 @@
         grid-template-columns: 1fr;
         gap: 24px;
       }
+    }
+
+    /* ================= 灯箱（Lightbox）样式 ================= */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(5, 11, 20, 0.95);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-img {
+      max-width: 85vw; /* 稍微缩小给两侧箭头留空间 */
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(0, 200, 255, 0.4);
+      border: 1px solid rgba(0, 200, 255, 0.5);
+      transform: scale(0.95);
+      transition: transform 0.3s ease, opacity 0.3s ease; /* 增加透明度过渡 */
+    }
+
+    .lightbox.active .lightbox-img {
+      transform: scale(1);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: #fff;
+      font-size: 3rem;
+      cursor: pointer;
+      transition: color 0.3s;
+      line-height: 1;
+      z-index: 10000;
+    }
+
+    .lightbox-close:hover {
+      color: #00c8ff;
+      text-shadow: 0 0 15px rgba(0, 200, 255, 0.8);
+    }
+
+    /* 前后切换箭头按钮 */
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 3rem;
+      cursor: pointer;
+      padding: 20px;
+      transition: all 0.3s ease;
+      z-index: 10000;
+      user-select: none;
+    }
+
+    .lightbox-nav:hover {
+      color: #00c8ff;
+      text-shadow: 0 0 15px rgba(0, 200, 255, 0.8);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lightbox-prev {
+      left: 20px;
+    }
+
+    .lightbox-next {
+      right: 20px;
     }
 
     /* 核心优势：与上方大框增加额外间隔 */
@@ -810,57 +850,18 @@
       font-size: 1.5rem;
     }
 
-    /* 联系方式 & 页脚 */
-    .contact-section {
-      padding: 50px 0 40px;
-      text-align: center;
-    }
-
-    .contact-methods {
-      display: flex;
-      justify-content: center;
-      gap: 60px;
-      flex-wrap: wrap;
-      margin: 40px 0;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      font-size: 1.2rem;
-      color: #eaf2ff;
-      background: rgba(0, 30, 60, 0.5);
-      padding: 18px 32px;
-      border-radius: 60px;
-      border: 1px solid rgba(0, 180, 255, 0.3);
-      transition: all 0.3s;
-    }
-
-    .contact-item:hover {
-      border-color: #00c8ff;
-      box-shadow: 0 0 25px rgba(0, 150, 255, 0.3);
-    }
-
-    .contact-item i {
-      color: #00c8ff;
-      font-size: 1.6rem;
-    }
-
+    /* 页脚 */
     .footer-bottom {
       border-top: 1px solid rgba(0, 150, 255, 0.15);
       padding: 30px 0;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
+      align-items: center;
       flex-wrap: wrap;
       gap: 20px;
       color: #6a8aaa;
       font-size: 0.9rem;
-    }
-
-    .footer-bottom a {
-      color: #7fb8e0;
-      text-decoration: none;
+      margin-top: 40px;
     }
 
     /* 响应式 */
@@ -878,12 +879,15 @@
       .global-clients { flex-direction: column; text-align: center; padding: 30px; }
       .clients-left { justify-content: center; }
       .client-icons { justify-content: center; }
+      .lightbox-close { top: 20px; right: 20px; font-size: 2.5rem; }
+      .lightbox-nav { font-size: 2.5rem; padding: 10px; }
+      .footer-bottom { justify-content: center; }
     }
 
     @media (max-width: 500px) {
       .hero h1 { font-size: 2.2rem; }
-      .btn-primary, .btn-outline { padding: 14px 28px; font-size: 1rem; }
-      .contact-item { padding: 14px 20px; font-size: 1rem; }
+      .btn-outline { padding: 14px 28px; font-size: 1rem; }
+      .lightbox-nav { font-size: 2rem; }
     }
   </style>
 </head>
@@ -905,7 +909,6 @@
       <a href="#interface">产品界面</a>
       <a href="#advantages">核心优势</a>
       <a href="#ecosystem">产品愿景</a>
-      <a href="#contact" class="contact-btn">联系我们</a>
     </div>
   </nav>
 
@@ -914,7 +917,7 @@
     <div class="hero-badge">
       <i class="fas fa-bolt" style="margin-right: 6px;"></i> 一体化 · 智能化 · 可定制
     </div>
-    <h1>您唯一需要的<br>ERP 系统</h1>
+    <h1>可深度定制的<br>ERP 系统</h1>
     <p class="hero-sub">
       用户友好 · 支持定制 · 一体化平台<br>
       <span class="hero-highlight">智能核心引擎，灵活适配业务</span><br>
@@ -928,8 +931,7 @@
       <span class="tag"><i class="fas fa-check-circle" style="margin-right: 6px;"></i> 项目</span>
     </div>
     <div class="cta-group">
-      <a href="#contact" class="btn-primary"><i class="fas fa-rocket"></i> 免费试用 / 咨询</a>
-      <a href="#features" class="btn-outline"><i class="fas fa-arrow-down"></i> 了解功能</a>
+      <a href="#features" class="btn-outline" style="padding: 16px 40px;"><i class="fas fa-arrow-down"></i> 了解功能</a>
     </div>
 
     <div class="stats">
@@ -1097,35 +1099,36 @@
     </div>
     
     <div class="gallery-grid">
-      <div class="gallery-item">
+      <!-- 使用 data-index 记录当前图片在数组中的索引 -->
+      <div class="gallery-item" data-index="0" onclick="openLightbox(0)">
         <img src="1.png" alt="会计模块界面">
         <div class="gallery-label"><i class="fas fa-calculator" style="margin-right:8px;"></i> 财务会计管理</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="1" onclick="openLightbox(1)">
         <img src="2.png" alt="销售模块界面">
         <div class="gallery-label"><i class="fas fa-shopping-cart" style="margin-right:8px;"></i> 销售订单管理</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="2" onclick="openLightbox(2)">
         <img src="3.png" alt="采购模块界面">
         <div class="gallery-label"><i class="fas fa-file-invoice-dollar" style="margin-right:8px;"></i> 供应商与采购</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="3" onclick="openLightbox(3)">
         <img src="4.png" alt="库存模块界面">
         <div class="gallery-label"><i class="fas fa-boxes" style="margin-right:8px;"></i> 库存与仓储</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="4" onclick="openLightbox(4)">
         <img src="5.png" alt="生产模块界面">
         <div class="gallery-label"><i class="fas fa-industry" style="margin-right:8px;"></i> 生产与制造</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="5" onclick="openLightbox(5)">
         <img src="6.png" alt="项目模块界面">
         <div class="gallery-label"><i class="fas fa-tasks" style="margin-right:8px;"></i> 项目与任务</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="6" onclick="openLightbox(6)">
         <img src="7.png" alt="资产模块界面">
         <div class="gallery-label"><i class="fas fa-building" style="margin-right:8px;"></i> 固定资产管理</div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="7" onclick="openLightbox(7)">
         <img src="8.png" alt="质量模块界面">
         <div class="gallery-label"><i class="fas fa-award" style="margin-right:8px;"></i> 质量管理控制</div>
       </div>
@@ -1179,7 +1182,7 @@
       <div>
         <span class="section-tag" style="text-align: left;">持续创新 = 深耕企业服务 + 技术驱动</span>
         <h2>AnutaERP 仅仅是一个开始</h2>
-        <p>我们正在持续打造更多企业级应用，涵盖AI智能体、商业智能（BI）分析、网站构建器、在线学习管理系统（LMS）、团队协作沟通工具等。</p>
+        <p>我们正在持续打造更多企业级应用，涵盖AI智能体、商业智能（BI）分析、跨境多平台订单与库存协同、客户关系管理（CRM）、敏捷协同办公等。</p>
       </div>
       <div class="stars-badge">
         <i class="fas fa-award"></i>
@@ -1191,30 +1194,99 @@
     </div>
   </section>
 
-  <!-- 联系方式（仅微信） -->
-  <section id="contact" class="container contact-section">
-    <div class="section-header">
-      <span class="section-tag">联系我们</span>
-      <h2 class="section-title">准备好切换到<br>下一代 AnutaERP 了吗？</h2>
-      <p class="section-desc">为您提供实施与支持服务，确保企业灵活调整并紧跟业务变化。</p>
-    </div>
-    <div class="contact-methods">
-      <div class="contact-item">
-        <i class="fab fa-weixin"></i>
-        <span>微信：18102826948</span>
-      </div>
-    </div>
-  </section>
-
   <!-- 页脚 -->
   <footer class="container">
     <div class="footer-bottom">
       <div>© 2026 AnutaERP · 企业级管理软件</div>
-      <div>
-        <a href="#" style="margin-right: 20px;"><i class="fas fa-file-alt"></i> 产品白皮书</a>
-        <a href="#"><i class="fas fa-globe"></i> 官方网站</a>
-      </div>
     </div>
   </footer>
+
+  <!-- 图片放大灯箱（Lightbox） -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <!-- 左右切换按钮 -->
+    <div class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</div>
+    <div class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</div>
+    
+    <img class="lightbox-img" id="lightbox-img" src="" alt="放大预览">
+  </div>
+
+  <!-- JavaScript 交互脚本 -->
+  <script>
+    // 定义所有的图片路径，按照顺序排列
+    const images = [
+      '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png'
+    ];
+    let currentIndex = 0;
+
+    // 获取灯箱元素
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    // 打开灯箱（接收传入的图片索引）
+    function openLightbox(index) {
+      currentIndex = index;
+      updateLightboxImage();
+      
+      lightbox.style.display = 'flex';
+      
+      setTimeout(() => {
+        lightbox.classList.add('active');
+      }, 10);
+      
+      document.body.style.overflow = 'hidden';
+    }
+
+    // 关闭灯箱
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      
+      setTimeout(() => {
+        lightbox.style.display = 'none';
+        lightboxImg.src = ''; 
+      }, 300);
+      
+      document.body.style.overflow = 'auto';
+    }
+
+    // 切换上一张/下一张
+    function changeImage(direction) {
+      // 计算新的索引，实现循环切换
+      currentIndex = (currentIndex + direction + images.length) % images.length;
+      
+      // 添加淡出淡入的视觉反馈效果
+      lightboxImg.style.opacity = '0.5';
+      
+      setTimeout(() => {
+        updateLightboxImage();
+        lightboxImg.style.opacity = '1';
+      }, 150);
+    }
+
+    // 更新灯箱图片
+    function updateLightboxImage() {
+      lightboxImg.src = images[currentIndex];
+    }
+
+    // 监听页面点击事件，点击灯箱遮罩层关闭
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeLightbox();
+      }
+    });
+
+    // 监听键盘事件（左、右切换，Esc 关闭）
+    document.addEventListener('keydown', function(e) {
+      if (!lightbox.classList.contains('active')) return; // 只有打开时才生效
+
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        changeImage(-1);
+      } else if (e.key === 'ArrowRight') {
+        changeImage(1);
+      }
+    });
+  </script>
 </body>
 </html>
