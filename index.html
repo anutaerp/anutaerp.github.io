@@ -56,9 +56,24 @@
       background: rgba(10, 22, 40, 0.75);
     }
     .logo {
-      display: flex; align-items: center;
+      display: flex; align-items: center; gap: 14px;
       text-decoration: none;
       flex-shrink: 0;
+    }
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+      background: linear-gradient(135deg, #ffffff 0%, #a8e4ff 45%, #7fe8ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 12px rgba(0, 220, 255, 0.35));
+      transition: filter 0.3s ease;
+    }
+    .logo:hover .logo-text {
+      filter: drop-shadow(0 0 18px rgba(0, 240, 255, 0.75));
     }
     .logo img {
       width: 64px;
@@ -419,12 +434,14 @@
       .lightbox-nav { font-size: 2.5rem; padding: 10px; }
       .footer-bottom { justify-content: center; }
       .logo img { width: 56px; height: 55px; }
+      .logo-text { font-size: 1.55rem; }
     }
     @media (max-width: 600px) {
       .feature-card { flex: 1 1 100%; }
       .advantage-grid { grid-template-columns: 1fr; }
       .lightbox-hint { font-size: 0.75rem; padding: 6px 12px; }
       .logo img { width: 48px; height: 47px; }
+      .logo-text { font-size: 1.35rem; }
     }
     @media (max-width: 500px) {
       .hero h1 { font-size: 2.2rem; }
@@ -443,6 +460,7 @@
   <nav class="navbar container">
     <a class="logo" href="#" aria-label="AnutaERP 首页">
       <img src="anuta.png" alt="AnutaERP Logo" width="64" height="63">
+      <span class="logo-text">AnutaERP</span>
     </a>
     <div class="nav-links">
       <a href="#features">核心功能</a>
